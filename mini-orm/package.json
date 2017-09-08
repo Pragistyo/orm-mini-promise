@@ -1,0 +1,17 @@
+{
+  "name": "mini-orm",
+  "version": "1.0.0",
+  "description": "- Pilihan A (poin 100 : many to many), kerjakan model dan fitur yang berkaitan dengan project dan engineer saja.",
+  "main": "setup.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "ejs": "^2.5.7",
+    "express": "^4.15.4",
+    "sqlite3": "^3.1.9"
+  }
+}
