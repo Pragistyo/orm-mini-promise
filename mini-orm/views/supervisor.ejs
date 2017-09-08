@@ -5,7 +5,26 @@
     <title>SUPERVISOR</title>
   </head>
   <h1>SUPERVISOR</h1>
+  <a href="/supervisor/add"></a>
   <body>
-
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>Supervisor Name</th>
+        <th>Supervisor Status</th>
+        <th>Option</th>
+    <%data.ForEach(z=>{%>
+      </tr>
+        <td><%=z.id %></td>
+        <td><%=z.name %></td>
+        <td><%=z.email %></td>
+        <td>
+          <a href="/supervisor/update/<%=z.id%>">EDIT</a>
+          <a href="/supervisor/delete/<%=z.id%>">DELETE</a>
+        </td>
+      <tr>
+      <%  })%>
+      </tr>
+    </table>
   </body>
 </html>

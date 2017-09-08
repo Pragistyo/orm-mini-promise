@@ -2,10 +2,29 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>SUPERVISOR</title>
+    <title>PROJECT</title>
   </head>
-  <h1>SUPERVISOR</h1>
+  <h1>PROJECT</h1>
+  <a href="/project/add"></a>
   <body>
-
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>Project Name</th>
+        <th>Project Status</th>
+        <th>Option</th>
+    <%data.ForEach(z=>{%>
+      </tr>
+        <td><%=z.id%></td>
+        <td><%=z.name%></td>
+        <td><%=z.status%></td>
+        <td>
+          <a href="/project/update/<%=z.id%>">EDIT</a>
+          <a href="/project/delete/<%=z.id%>">DELETE</a>
+        </td>
+      <tr>
+      <%  })%>
+      </tr>
+    </table>
   </body>
 </html>

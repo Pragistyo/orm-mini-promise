@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ADD pROJECT</title>
+  </head>
+  <body>
+    <form action="/project/add" method="post">
+      <fieldset>
+        <input type="text" name="name" value="" placeholder="nama">
+        <input type="text" name="status" value="" placeholder="status">
+        <section>
+          <%=dataSupervisor.forEach(z=>{%>
+            <option value="<%=z.id%>"><%=z.name%></option>
+          <%=})%>
+        </section>
+      </fieldset>
+    </form>
+      <a href="/project/list">Back</a>
+  </body>
+</html>
