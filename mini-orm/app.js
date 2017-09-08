@@ -11,12 +11,12 @@ app.set('view engine','ejs')
 
 
 const index       = require('./router/index.js');
-// const project     = require('./router/project.js')
-// const supervisor  = require('./router/supervisor.js');
+const project     = require('./router/project.js')
+const supervisor  = require('./router/supervisor.js');
 
 app.use('/', index)
-// app.use('/project', project)
-// app.use('/supervisor', supervisor)
+app.use('/project', project)
+app.use('/supervisor', supervisor)
 
 
 
