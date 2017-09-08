@@ -1,5 +1,6 @@
 const sqlite3    = require('sqlite3').verbose();
-const connection = new sqlite3.Database()
+const db = new sqlite3.Database('db/database.db')
+const Project = require('./project.js')
 
 
 class Supervisor {
@@ -13,6 +14,19 @@ class Supervisor {
     return new Promise((resolve,reject)=>{
       db.all(`SELECT * FROM supervisor`, (err, rows)=>{
           let results = rows.map(m => new Supervisor(m))
+          if(!err){
+            resolve(results)
+          } else {
+            reject(err)
+          }
+      })
+    })
+  }
+
+  static projectAll(){
+    return new Promise((resolve,reject)=>{
+      db.all(`SELECT * FROM project`, (err, rows)=>{
+          let results = rows.map(m => new Project(m))
           if(!err){
             resolve(results)
           } else {
@@ -73,8 +87,9 @@ class Supervisor {
 
   static destroy() {
     return new Promise((resolve,reject)=>{
-      db.run(`DELETE FROM supervisor WHERE id = ${id}`,()=>{
-        resolve()
+        db.run(`DELETE FROM supervisor WHERE id = ${id}`,()=>{
+          resolve()
+      })
     })
   }
 

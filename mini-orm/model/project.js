@@ -1,5 +1,6 @@
 const sqlite3    = require('sqlite3').verbose();
-const db        = new sqlite3.Database('db/database.db')
+const db         = new sqlite3.Database('db/database.db')
+const Supervisor = require('./supervisor.js')
 
 
 class Project {
@@ -13,6 +14,19 @@ class Project {
     return new Promise((resolve,reject)=>{
       db.all(`SELECT * FROM project`, (err, rows)=>{
           let results = rows.map(m => new Project(m))
+          if(!err){
+            resolve(results)
+          } else {
+            reject(err)
+          }
+      })
+    })
+  }
+
+  static spvAll(){
+    return new Promise((resolve,reject)=>{
+      db.all(`SELECT * FROM supervisor`, (err, rows)=>{
+          let results = rows.map(m => new Supervisor(m))
           if(!err){
             resolve(results)
           } else {
@@ -71,10 +85,27 @@ class Project {
     })
   }
 
-  static destroy() {
+  static destroy(params) {
     return new Promise((resolve,reject)=>{
-      db.run(`DELETE FROM project WHERE id = ${id}`,()=>{
+      db.run(`DELETE FROM project WHERE id = ${params}`,()=>{
         resolve()
+      })
+    })
+  }
+
+  static manipulate(){
+    let count = 0;
+    return new Promise((resolve,reject)=>{
+      Project.findAll().then(hasil=>{
+        hasil.forEach(eachHasil=>{
+          Supervisor.findById(eachHasil.supervisorID).then(spvData=>{
+            eachHasil['namaSupervisor'] = spvData[0].nama
+            count ++
+            if(count == hasil.length){
+              resolve(hasil)
+            }
+          })
+        })
       })
     })
   }
