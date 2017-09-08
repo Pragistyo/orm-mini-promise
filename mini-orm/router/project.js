@@ -3,7 +3,7 @@ const router  = express.Router();
 // const sqlite3 = require('sqlite3').verbose();
 const model = require('../model/project.js');
 
-router.get('/',(req,res)=>{
+router.get('/list',(req,res)=>{
  model.findAll().then(row=>{
   //  model.spvAll().then(rowSupervisor=>{
      model.manipulate().then(rowsManipulate=>{
