@@ -8,12 +8,18 @@
     <form action="/project/add" method="post">
       <fieldset>
         <input type="text" name="name" value="" placeholder="nama">
-        <input type="text" name="status" value="" placeholder="status">
-        <section>
-          <%=dataSupervisor.forEach(z=>{%>
+        <select class="" name="status">
+          <option value="Planning">Planning</option>
+          <option value="On Planning">On progress</option>
+          <option value="Done">Done</option>
+        </select>
+        <!-- <input type="text" name="status" value="" placeholder="status"> -->
+        <button type="submit" name="button">SAVE</button>
+        <!-- <select>
+          <%dataSupervisor.forEach(z=>{%>
             <option value="<%=z.id%>"><%=z.name%></option>
-          <%=})%>
-        </section>
+          <%})%>
+        </select> -->
       </fieldset>
     </form>
       <a href="/project/list">Back</a>

@@ -1,30 +1,32 @@
-<!DOCTYPE html>
-<html>
-  <head>
+<%- include partial/header%>
     <meta charset="utf-8">
     <title>SUPERVISOR</title>
-  </head>
   <h1>SUPERVISOR</h1>
-  <a href="/supervisor/add"></a>
   <body>
-    <table border="1">
+    <table class="table table-bordered">
       <tr>
         <th>ID</th>
         <th>Supervisor Name</th>
-        <th>Supervisor Status</th>
+        <th>Supervisor Email</th>
+        <th>Assign Project</th>
         <th>Option</th>
-    <%data.ForEach(z=>{%>
+    <%data.forEach(z=>{%>
       </tr>
-        <td><%=z.id %></td>
-        <td><%=z.name %></td>
-        <td><%=z.email %></td>
+        <td><%=z.id%></td>
+        <td><%=z.name%></td>
+        <td><%=z.email%></td>
         <td>
-          <a href="/supervisor/update/<%=z.id%>">EDIT</a>
-          <a href="/supervisor/delete/<%=z.id%>">DELETE</a>
+          <a class="btn btn-primary"href="/supervisor/assignProject/<%=z.id%>">Assign Project</a>
+        </td>
+        <td>
+          <a class="btn btn-info"href="/supervisor/update/<%=z.id%>">EDIT</a>
+          <a class="btn btn-danger"href="/supervisor/delete/<%=z.id%>">DELETE</a>
         </td>
       <tr>
       <%  })%>
       </tr>
     </table>
+    <a class="btn btn-success"href="/supervisor/add">add</a>
+    <a class="btn btn-danger"href="/">Home</a>
   </body>
 </html>

@@ -8,12 +8,13 @@
     <form action="/supervisor/add" method="post">
       <fieldset>
         <input type="text" name="name" value="" placeholder="nama">
-        <input type="text" name="email" value="" placeholder="status">
-        <section>
+        <input type="text" name="email" value="" placeholder="email">
+        <button type="submit" name="">SAVE</button>
+        <!-- <select>
           <%dataSupervisor.forEach(z=>{%>
             <option value="<%=z.id%>"><%=z.name%></option>
           <%})%>
-        </section>
+        </select> -->
       </fieldset>
     </form>
       <a href="/supervisor/list">Back</a>

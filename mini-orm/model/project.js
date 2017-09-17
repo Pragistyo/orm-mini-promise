@@ -6,7 +6,7 @@ const Supervisor = require('./supervisor.js')
 class Project {
   constructor(raw) {
     this.id = raw.id
-    this.nama = raw.nama
+    this.name = raw.name
     this.status = raw.status
   }
 
@@ -51,7 +51,7 @@ class Project {
 
   static findWhere(attr,key) {
     return new Promise((resolve,reject)=>{
-      db.all(`SELECT * FROM project where ${attr} = ${params}`, (err, rows)=>{
+      db.all(`SELECT * FROM project where ${attr} = ${key}`, (err, rows)=>{
           let results = rows.map(m => new Project(m))
           if(!err){
             resolve(results)
@@ -63,7 +63,7 @@ class Project {
   }
 
   static create(data) {
-    return new Promis((resolve,reject)=>{
+    return new Promise((resolve,reject)=>{
       db.run(`INSERT INTO project(name,status)
               VALUES('${data.name}',
                      '${data.status}')`,(err)=>{
@@ -76,9 +76,22 @@ class Project {
   static update(data,params) {
     return new Promise((resolve,reject)=>{
       db.run(`UPDATE project
-              SET name     = '${data.name}',
-                  status   = '${data.status}'
-                  WHERE id =  ${params.id}`,(err)=>{
+              SET name         = '${data.name}',
+                  status       = '${data.status}'
+                  WHERE id     =  ${params.id}`,(err)=>{
+                    if(!err){resolve()}
+                    else{reject(err)}
+                  })
+    })
+  }
+
+  static updateAssociation(bodyName,bodyStatus,paramsId,bodyId) {
+    return new Promise((resolve,reject)=>{
+      db.run(`UPDATE project
+              SET name         = '${bodyName}',
+                  status       = '${bodyStatus}',
+                  supervisorID = '${paramsId}'
+                  WHERE id     =  ${bodyId}`,(err)=>{
                     if(!err){resolve()}
                     else{reject(err)}
                   })

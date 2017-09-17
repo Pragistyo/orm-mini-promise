@@ -6,7 +6,7 @@ const Project = require('./project.js')
 class Supervisor {
   constructor(raw) {
     this.id = raw.id
-    this.nama = raw.nama
+    this.name = raw.name
     this.email = raw.email
   }
 
@@ -26,9 +26,9 @@ class Supervisor {
   static projectAll(){
     return new Promise((resolve,reject)=>{
       db.all(`SELECT * FROM project`, (err, rows)=>{
-          let results = rows.map(m => new Project(m))
+          // let results = rows.map(m => new Project(m))
           if(!err){
-            resolve(results)
+            resolve(rows)
           } else {
             reject(err)
           }
@@ -63,7 +63,7 @@ class Supervisor {
   }
 
   static create(data) {
-    return new Promis((resolve,reject)=>{
+    return new Promise((resolve,reject)=>{
       db.run(`INSERT INTO supervisor(name,email)
               VALUES('${data.name}',
                      '${data.email}')`,(err)=>{
@@ -75,9 +75,10 @@ class Supervisor {
 
   static update(data,params) {
     return new Promise((resolve,reject)=>{
+      console.log(data);
       db.run(`UPDATE supervisor
               SET name     = '${data.name}',
-                  status   = '${data.email}'
+                  email   = '${data.email}'
                   WHERE id =  ${params.id}`,(err)=>{
                     if(!err){resolve()}
                     else{reject(err)}
@@ -85,7 +86,7 @@ class Supervisor {
     })
   }
 
-  static destroy() {
+  static destroy(id) {
     return new Promise((resolve,reject)=>{
         db.run(`DELETE FROM supervisor WHERE id = ${id}`,()=>{
           resolve()

@@ -1,19 +1,14 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
+<%- include partial/header%>
     <title>PROJECT</title>
-  </head>
   <h1>PROJECT</h1>
-  <a href="/project/add"></a>
   <body>
-    <table border="1">
+    <table class="table table-bordered">
       <tr>
         <th>ID</th>
         <th>Project Name</th>
         <th>Project Status</th>
         <th>Option</th>
-    <%data.ForEach(z=>{%>
+    <%data.forEach(z=>{%>
       </tr>
         <td><%=z.id%></td>
         <td><%=z.name%></td>
@@ -26,5 +21,7 @@
       <%  })%>
       </tr>
     </table>
+    <a class="btn btn-success"href="/project/add">add</a>
+    <a class="btn btn-danger"href="/">Home</a>
   </body>
 </html>

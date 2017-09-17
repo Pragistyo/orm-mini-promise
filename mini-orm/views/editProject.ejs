@@ -5,11 +5,20 @@
     <title>EDIT PROJECT</title>
   </head>
   <body>
-    <form class="" action="/poject/update/data[0].id" method="post">
+    <form action="/project/update/<%=data[0].id%>" method="post">
       <fieldset>
-        <input type="text" name="name" value="data[0].name" placeholder="nama">
-        <input type="text" name="status" value="data[0].status" placeholder="status">
-        <section>
+        <input type="text" name="name" value="<%=data[0].name%>" placeholder="nama">
+        <select class="" name="status">
+          <!-- if(data[0].status === "Planning"){
+
+          } -->
+          <option value="Planning">Planning</option>
+          <option value="On Progress">On Progress</option>
+          <option value="Done">Done</option>
+        </select>
+        <!-- <input type="text" name="status" value="<%=data[0].status%>" placeholder="status"> -->
+        <button type="submit" name="button">SAVE</button>
+        <!-- <select>
           <%dataSupervisor.forEach(z=>{%>
             <%if(z.id == data[0].id){%>
               <option value="<%=z.id%>"selected><%=z.name%></option>
@@ -17,9 +26,9 @@
               <option value="<%=z.id%>"><%=z.name%></option>
             <%}%>
           <%})%>
-        </section>
+        </select> -->
       </fieldset>
     </form>
-    <a href="/project/list"></a>
+    <a href="/project/list">Back</a>
   </body>
 </html>

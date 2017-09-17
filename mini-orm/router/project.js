@@ -6,16 +6,18 @@ const model = require('../model/project.js');
 router.get('/list',(req,res)=>{
  model.findAll().then(row=>{
   //  model.spvAll().then(rowSupervisor=>{
-     model.manipulate().then(rowsManipulate=>{
-    //  res.render('project',{data:row,dataSupervisor:rowSupervisor})
-      res.send(row)
+    //  model.manipulate().then(rowsManipulate=>{
+     res.render('project',{data:row})
+      // res.send(row)
     // })
-   })
+  //  })
  })
 })
 
 router.get('/add',(req,res)=>{
-  res.render('addProject')
+   model.spvAll().then(rowSupervisor=>{
+  res.render('addProject',{dataSupervisor:rowSupervisor})
+  })
 })
 
 router.post('/add',(req,res)=>{
@@ -26,11 +28,19 @@ router.post('/add',(req,res)=>{
 
 router.get('/update/:id',(req,res)=>{
   model.findById(req.params.id).then(rows=>{
-    // model.spvAll().then(rowsSpv=>{
+    model.spvAll().then(rowsSpv=>{
       res.render('editProject',{data:rows,dataSupervisor:rowsSpv})
-    // })
+    })
   })
 })
+
+router.post('/update/:id',(req,res)=>{
+  console.log(`${req.body.status}`);
+  model.update(req.body,req.params).then(()=>{
+    res.redirect('/project/list')
+  })
+})
+
 
 router.get('/delete/:id',(req,res)=>{
   model.destroy(req.params.id).then(()=>{

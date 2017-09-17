@@ -1,0 +1,47 @@
+<%- include partial/header%>
+    <title>Assign Project</title>
+    <h1>Supervisor: <%=data[0].name%></h1>
+  <body>
+    <h2>SELECT PROJECT</h2>
+    <table class="table">
+      <tr>
+        <th>Project Id</th>
+        <th>Project Name</th>
+        <th>Project Status</th>
+        <th>Assign Project</th>
+      </tr>
+      <%dataProject.forEach(z=>{%>
+      <tr>
+        <form action="/supervisor/assignProject/<%=data[0].id%>" method="post">
+        <td><%=z.id%></td>
+        <input type="hidden" name="id" value="<%=z.id%>">
+        <td><%=z.name%></td>
+        <input type="hidden" name="name" value="<%=z.name%>">
+        <td><%=z.status%></td>
+        <input type="hidden" name="status" value="<%=z.status%>">
+        <td>
+          <button class="btn btn-success"type="submit" name="button">assign</button>
+        </td>
+      </form>
+      </tr>
+    </table><br>
+    <hr>
+    <h2>ALL PROJECT SUPERVISED BY <%=data[0].name%></h2>
+    <table class="table">
+      <tr>
+        <th>Project Id</th>
+        <th>Project Name</th>
+        <th>Project Status</th>
+      </tr>
+      <%dataEach.forEach(d=>{%>
+      <tr>
+        <td><%=d.id%></td>
+        <td><%=d.name%></td>
+        <td><%=d.status%></td>
+      </tr>
+      <%})%>
+    </table>
+   <%})%>
+  </body>
+  <a class="btn btn-danger"href="/supervisor/list"><b>Back</b></a>
+</html>
